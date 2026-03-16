@@ -1,0 +1,46 @@
+aid: software-ag
+name: Software AG
+description: >-
+  Software AG provides enterprise integration and API management through
+  webMethods, a platform for connecting applications, processes, and people
+  across hybrid cloud and on-premises environments. The webMethods Developer
+  Portal provides a marketplace for publishing and discovering REST, SOAP, and
+  OData APIs for third-party developers and partners.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Enterprise Integration
+  - API Management
+  - iPaaS
+  - webMethods
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/software-ag/refs/heads/main/apis.yml
+created: '2026-03-16'
+modified: '2026-03-16'
+specificationVersion: '0.19'
+apis:
+  - aid: software-ag:webmethods-api-management
+    name: webMethods API Management
+    description: >-
+      The Software AG webMethods API Management platform provides a
+      comprehensive developer portal for publishing REST, SOAP and OData APIs.
+      It supports API design, import, policy management, developer engagement,
+      and API analytics.
+    humanURL: https://developer.softwareag.com/en/webmethods-api-management.html
+    tags:
+      - API Management
+      - Developer Portal
+      - Integration
+    properties:
+      - type: Documentation
+        url: https://documentation.softwareag.com/webmethods/compendiums/v10-5/C_API_Management/api-mgmt-comp/co-oview_what_is_api_portal.html
+common:
+  - type: Portal
+    url: https://developer.softwareag.com/
+  - type: Website
+    url: https://www.softwareag.com/
+  - type: GitHub Organization
+    url: https://github.com/SoftwareAG
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
