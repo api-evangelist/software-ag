@@ -1,0 +1,114 @@
+rules:
+  webmethods-api-naming-convention:
+    description: API names must use camelCase format consistent with webMethods conventions
+    message: "API names should use camelCase (e.g., getAPIs, createAPI)"
+    severity: warn
+    given: "$.paths[*][*].operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]+$"
+
+  webmethods-require-operation-id:
+    description: All operations must have an operationId for code generation
+    message: "Operation must have an operationId"
+    severity: error
+    given: "$.paths[*][*]"
+    then:
+      field: operationId
+      function: truthy
+
+  webmethods-require-summary:
+    description: All operations must have a summary for developer portal display
+    message: "Operation must have a summary"
+    severity: error
+    given: "$.paths[*][*]"
+    then:
+      field: summary
+      function: truthy
+
+  webmethods-require-tags:
+    description: All operations must be tagged for Developer Portal categorization
+    message: "Operation must have at least one tag"
+    severity: warn
+    given: "$.paths[*][*]"
+    then:
+      field: tags
+      function: truthy
+
+  webmethods-api-id-path-parameter:
+    description: Resource-specific paths must use {apiId} as the primary identifier
+    message: "API resource paths should use {apiId} pattern for consistency"
+    severity: info
+    given: "$.paths"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+
+  webmethods-require-response-200:
+    description: GET operations must define a 200 response
+    message: "GET operations must define a 200 success response"
+    severity: error
+    given: "$.paths[*].get"
+    then:
+      field: responses.200
+      function: truthy
+
+  webmethods-require-response-content:
+    description: Successful responses should define a content schema
+    message: "200 responses should define content schema"
+    severity: warn
+    given: "$.paths[*][*].responses.200"
+    then:
+      field: content
+      function: truthy
+
+  webmethods-security-required:
+    description: All operations should reference security schemes (Basic Auth required)
+    message: "Operations should define security requirements"
+    severity: warn
+    given: "$.paths[*][*]"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+
+  webmethods-rest-v1-prefix:
+    description: API Gateway REST paths use the /rest/apigateway base path
+    message: "Paths should follow the /rest/apigateway convention"
+    severity: info
+    given: "$.servers[*].url"
+    then:
+      function: pattern
+      functionOptions:
+        match: ".*/rest/apigateway.*"
+
+  webmethods-parameter-descriptions:
+    description: All parameters should include descriptions for Developer Portal display
+    message: "Parameters must include a description"
+    severity: warn
+    given: "$.paths[*][*].parameters[*]"
+    then:
+      field: description
+      function: truthy
+
+  webmethods-request-body-content-type:
+    description: Request bodies must specify a content type
+    message: "Request bodies must define content type"
+    severity: error
+    given: "$.paths[*][*].requestBody"
+    then:
+      field: content
+      function: truthy
+
+  webmethods-schema-properties:
+    description: Schema objects should define their properties
+    message: "Schema objects should define properties"
+    severity: warn
+    given: "$.components.schemas[*]"
+    then:
+      field: properties
+      function: truthy

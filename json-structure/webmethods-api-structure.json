@@ -1,0 +1,56 @@
+{
+  "title": "webMethods API Gateway - API Resource Structure",
+  "description": "JSON Structure documentation for the Software AG webMethods API Gateway API resource",
+  "version": "11.0",
+  "source": "https://github.com/SoftwareAG/webmethods-api-gateway",
+  "structures": [
+    {
+      "name": "API",
+      "description": "Core API resource representing a managed API in webMethods API Gateway",
+      "fields": [
+        {"name": "id", "type": "string", "required": false, "description": "System-generated unique API identifier"},
+        {"name": "apiName", "type": "string", "required": true, "description": "Display name of the API"},
+        {"name": "apiVersion", "type": "string", "required": false, "description": "Version string, defaults to 1.0"},
+        {"name": "apiDescription", "type": "string", "required": false, "description": "Human-readable description"},
+        {"name": "type", "type": "enum[REST|SOAP|WEBSOCKET|ODATA]", "required": true, "description": "Protocol type"},
+        {"name": "isActive", "type": "boolean", "required": false, "description": "Whether API is active"},
+        {"name": "tags", "type": "array<string>", "required": false, "description": "Categorization tags"},
+        {"name": "maturityState", "type": "enum[BETA|RELEASED|DEPRECATED]", "required": false, "description": "Lifecycle state"},
+        {"name": "systemVersion", "type": "integer", "required": false, "description": "Internal version counter"},
+        {"name": "created", "type": "date-time", "required": false, "description": "Creation timestamp"},
+        {"name": "modified", "type": "date-time", "required": false, "description": "Last modification timestamp"},
+        {"name": "gatewayEndpoints", "type": "array<GatewayEndpoint>", "required": false, "description": "Custom gateway endpoints"}
+      ]
+    },
+    {
+      "name": "GatewayEndpoint",
+      "description": "Custom endpoint configuration for an API",
+      "fields": [
+        {"name": "name", "type": "string", "required": false, "description": "Endpoint name"},
+        {"name": "url", "type": "string", "required": true, "description": "Endpoint URL"},
+        {"name": "isDefault", "type": "boolean", "required": false, "description": "Whether this is the default endpoint"}
+      ]
+    },
+    {
+      "name": "Application",
+      "description": "Consumer application registered to use an API",
+      "fields": [
+        {"name": "id", "type": "string", "required": false, "description": "System-generated application identifier"},
+        {"name": "name", "type": "string", "required": true, "description": "Application name"},
+        {"name": "description", "type": "string", "required": false, "description": "Application description"},
+        {"name": "owner", "type": "string", "required": false, "description": "Application owner"},
+        {"name": "identifiers", "type": "array<Identifier>", "required": false, "description": "API keys and credentials"}
+      ]
+    },
+    {
+      "name": "Policy",
+      "description": "Gateway policy applied to an API",
+      "fields": [
+        {"name": "id", "type": "string", "required": false, "description": "Policy identifier"},
+        {"name": "name", "type": "string", "required": true, "description": "Policy name"},
+        {"name": "type", "type": "string", "required": false, "description": "Policy type"},
+        {"name": "enabled", "type": "boolean", "required": false, "description": "Whether the policy is active"}
+      ]
+    }
+  ]
+}

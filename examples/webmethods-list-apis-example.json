@@ -1,0 +1,51 @@
+{
+  "title": "List APIs - Example Request and Response",
+  "description": "Example of listing all APIs in the webMethods API Gateway",
+  "request": {
+    "method": "GET",
+    "url": "http://localhost:5555/rest/apigateway/apis?from=0&size=10",
+    "headers": {
+      "Authorization": "Basic YWRtaW5pc3RyYXRvcjptYW5hZ2U=",
+      "Content-Type": "application/json"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "apiResponse": {
+        "count": 2,
+        "apis": [
+          {
+            "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "apiName": "Customer Order API",
+            "apiVersion": "2.0",
+            "apiDescription": "REST API for managing customer orders in the enterprise system",
+            "type": "REST",
+            "isActive": true,
+            "tags": ["Orders", "Customer", "Enterprise"],
+            "maturityState": "RELEASED",
+            "systemVersion": 5,
+            "created": "2025-01-15T10:30:00Z",
+            "modified": "2025-03-20T14:45:00Z"
+          },
+          {
+            "id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
+            "apiName": "Inventory Management API",
+            "apiVersion": "1.5",
+            "apiDescription": "SOAP-based API for inventory tracking and management",
+            "type": "SOAP",
+            "isActive": false,
+            "tags": ["Inventory", "ERP", "Backend"],
+            "maturityState": "BETA",
+            "systemVersion": 2,
+            "created": "2025-02-10T08:00:00Z",
+            "modified": "2025-04-01T11:00:00Z"
+          }
+        ]
+      }
+    }
+  }
+}

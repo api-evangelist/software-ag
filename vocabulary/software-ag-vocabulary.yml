@@ -1,0 +1,102 @@
+vocabulary:
+  name: Software AG webMethods Vocabulary
+  description: >-
+    Operational vocabulary and taxonomy for the Software AG webMethods API
+    management platform, covering API lifecycle management, enterprise integration,
+    and developer portal concepts.
+  version: '1.0'
+  created: '2026-05-02'
+  modified: '2026-05-02'
+
+domains:
+  - name: API Management
+    description: Core API lifecycle management concepts
+    terms:
+      - term: API Gateway
+        definition: >-
+          The webMethods API Gateway runtime component that enforces policies,
+          authenticates consumers, and routes traffic to backend services.
+      - term: Developer Portal
+        definition: >-
+          The webMethods Developer Portal marketplace where API providers
+          publish APIs and developers discover and subscribe to them.
+      - term: API Lifecycle
+        definition: >-
+          The sequence of states an API goes through: creation, activation,
+          publishing, versioning, deprecation, and retirement.
+      - term: API Activation
+        definition: >-
+          The act of making an API available to consumers by activating it
+          in the API Gateway, enabling traffic routing.
+      - term: API Maturity State
+        definition: >-
+          The lifecycle stage of an API: BETA (early access), RELEASED
+          (production-ready), or DEPRECATED (scheduled for retirement).
+      - term: Policy
+        definition: >-
+          A configurable rule applied to API traffic for security, throttling,
+          transformation, routing, or monitoring purposes.
+      - term: Global Policy
+        definition: >-
+          A policy applied across multiple APIs in the API Gateway, enforcing
+          organization-wide standards and security requirements.
+
+  - name: Enterprise Integration
+    description: Integration platform concepts
+    terms:
+      - term: webMethods
+        definition: >-
+          Software AG's enterprise integration platform brand encompassing
+          API Gateway, Integration Server, Developer Portal, and cloud services.
+      - term: Integration Server
+        definition: >-
+          The webMethods runtime engine for executing integration flows,
+          connecting enterprise applications, databases, and external services.
+      - term: Flow Service
+        definition: >-
+          A webMethods Integration Server service that orchestrates integration
+          logic using a visual flow-based programming model.
+      - term: Adapter
+        definition: >-
+          A webMethods connector that provides pre-built integration with
+          specific technologies, protocols, or enterprise applications.
+
+  - name: Consumer Management
+    description: API consumer and application concepts
+    terms:
+      - term: Application
+        definition: >-
+          A registered consumer entity in the Developer Portal that subscribes
+          to APIs and holds credentials (API keys) for access.
+      - term: Community
+        definition: >-
+          A group in the Developer Portal that controls which APIs are visible
+          and accessible to a set of consumer applications.
+      - term: Subscription
+        definition: >-
+          A relationship between an Application and an API granting access
+          subject to the API's policies and plans.
+      - term: API Key
+        definition: >-
+          A credential issued to an Application to authenticate API calls
+          made through the API Gateway.
+
+  - name: API Types
+    description: Supported API protocol types
+    terms:
+      - term: REST API
+        definition: >-
+          A RESTful API defined using OpenAPI (Swagger) specification,
+          the most common API type in webMethods API Gateway.
+      - term: SOAP API
+        definition: >-
+          A web service using SOAP protocol, defined by a WSDL document
+          and managed through the API Gateway.
+      - term: WebSocket API
+        definition: >-
+          A real-time bidirectional API using the WebSocket protocol,
+          enabling persistent connections for streaming data.
+      - term: OData API
+        definition: >-
+          An API following the OData (Open Data Protocol) standard for
+          RESTful data services with standardized querying capabilities.

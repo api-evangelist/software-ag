@@ -1,0 +1,118 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/software-ag/json-schema/webmethods-api-schema.json",
+  "title": "webMethods API",
+  "description": "JSON Schema for a Software AG webMethods API Gateway API resource",
+  "type": "object",
+  "required": ["apiName", "type"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the API in the API Gateway"
+    },
+    "apiName": {
+      "type": "string",
+      "description": "Display name of the API",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "apiVersion": {
+      "type": "string",
+      "description": "Version string of the API",
+      "default": "1.0"
+    },
+    "apiDescription": {
+      "type": "string",
+      "description": "Human-readable description of the API"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["REST", "SOAP", "WEBSOCKET", "ODATA"],
+      "description": "Protocol type of the API"
+    },
+    "isActive": {
+      "type": "boolean",
+      "description": "Whether the API is currently active and available to consumers"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Tags for categorizing the API in the Developer Portal"
+    },
+    "maturityState": {
+      "type": "string",
+      "enum": ["BETA", "RELEASED", "DEPRECATED"],
+      "description": "Lifecycle maturity state of the API"
+    },
+    "systemVersion": {
+      "type": "integer",
+      "description": "Internal system version number"
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the API was created"
+    },
+    "modified": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the API was last modified"
+    },
+    "gatewayEndpoints": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/GatewayEndpoint"
+      },
+      "description": "Custom gateway endpoints for the API"
+    }
+  },
+  "definitions": {
+    "GatewayEndpoint": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the gateway endpoint"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL of the gateway endpoint"
+        },
+        "isDefault": {
+          "type": "boolean",
+          "description": "Whether this is the default endpoint"
+        }
+      }
+    },
+    "Application": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "identifiers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {"type": "string"},
+              "value": {"type": "string"}
+            }
+          }
+        }
+      }
+    }
+  }
+}

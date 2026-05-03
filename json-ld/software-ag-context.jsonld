@@ -1,0 +1,72 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "webmethods": "https://www.softwareag.com/webmethods/ns#",
+    "api": "https://api-evangelist.github.io/software-ag/ns#",
+    "API": {
+      "@id": "webmethods:API",
+      "@type": "@id"
+    },
+    "apiName": {
+      "@id": "schema:name"
+    },
+    "apiVersion": {
+      "@id": "schema:version"
+    },
+    "apiDescription": {
+      "@id": "schema:description"
+    },
+    "type": {
+      "@id": "schema:additionalType"
+    },
+    "isActive": {
+      "@id": "webmethods:isActive",
+      "@type": "xsd:boolean"
+    },
+    "tags": {
+      "@id": "schema:keywords"
+    },
+    "maturityState": {
+      "@id": "webmethods:maturityState"
+    },
+    "created": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "modified": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:dateTime"
+    },
+    "Application": {
+      "@id": "webmethods:Application",
+      "@type": "@id"
+    },
+    "GatewayEndpoint": {
+      "@id": "webmethods:GatewayEndpoint",
+      "@type": "@id"
+    },
+    "Policy": {
+      "@id": "webmethods:Policy",
+      "@type": "@id"
+    },
+    "owner": {
+      "@id": "schema:author"
+    },
+    "APIGateway": {
+      "@id": "webmethods:APIGateway",
+      "@type": "@id"
+    },
+    "DeveloperPortal": {
+      "@id": "webmethods:DeveloperPortal",
+      "@type": "@id"
+    },
+    "IntegrationServer": {
+      "@id": "webmethods:IntegrationServer",
+      "@type": "@id"
+    },
+    "SoftwareAG": {
+      "@id": "schema:Organization",
+      "@type": "@id"
+    }
+  }
+}
