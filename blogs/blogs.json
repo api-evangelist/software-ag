@@ -1,0 +1,13 @@
+{
+  "repo": "software-ag",
+  "feeds": [
+    {
+      "source": "https://techcommunity.softwareag.com/",
+      "feed_url": "https://techcommunity.softwareag.com/posts.rss",
+      "saved": 10,
+      "title": "Software AG Tech Community - Latest posts"
+    }
+  ],
+  "post_count": 10,
+  "fetched": "2026-05-03T23:36:42Z"
+}
