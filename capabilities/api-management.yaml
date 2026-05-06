@@ -1,201 +1,378 @@
-naftiko: "1.0.0-alpha1"
-
+naftiko: 1.0.0-alpha2
 info:
-  label: "Software AG webMethods API Management"
-  description: >-
-    Unified API management workflow for Software AG webMethods, combining API
-    Gateway management operations for creating, activating, publishing, and
-    monitoring APIs in enterprise integration environments. Designed for API
-    platform administrators and integration engineers.
+  label: Software AG webMethods API Management
+  description: Unified API management workflow for Software AG webMethods, combining API Gateway management operations for
+    creating, activating, publishing, and monitoring APIs in enterprise integration environments. Designed for API platform
+    administrators and integration engineers.
   tags:
-    - API Management
-    - Enterprise Integration
-    - webMethods
-    - Software AG
-    - API Gateway
-    - Developer Portal
-  created: "2026-05-02"
-  modified: "2026-05-02"
-
+  - API Management
+  - Enterprise Integration
+  - webMethods
+  - Software AG
+  - API Gateway
+  - Developer Portal
+  created: '2026-05-02'
+  modified: '2026-05-06'
 binds:
-  - namespace: env
-    keys:
-      WEBMETHODS_API_GATEWAY_USER: WEBMETHODS_API_GATEWAY_USER
-      WEBMETHODS_API_GATEWAY_PASSWORD: WEBMETHODS_API_GATEWAY_PASSWORD
-
+- namespace: env
+  keys:
+    WEBMETHODS_API_GATEWAY_USER: WEBMETHODS_API_GATEWAY_USER
+    WEBMETHODS_API_GATEWAY_PASSWORD: WEBMETHODS_API_GATEWAY_PASSWORD
 capability:
   consumes:
-    - import: webmethods-api-gateway
-      location: ./shared/webmethods-api-gateway.yaml
-
+  - type: http
+    namespace: webmethods-api-gateway
+    baseUri: http://localhost:5555/rest/apigateway
+    description: webMethods API Gateway Service Management REST API
+    authentication:
+      type: basic
+      username: '{{WEBMETHODS_API_GATEWAY_USER}}'
+      password: '{{WEBMETHODS_API_GATEWAY_PASSWORD}}'
+    resources:
+    - name: apis
+      path: /apis
+      description: API lifecycle management operations
+      operations:
+      - name: list-apis
+        method: GET
+        description: Retrieve all or filtered APIs with pagination
+        inputParameters:
+        - name: apiIds
+          in: query
+          type: string
+          required: false
+          description: Comma-separated list of API IDs to filter
+        - name: from
+          in: query
+          type: integer
+          required: false
+          description: Starting index for pagination
+        - name: size
+          in: query
+          type: integer
+          required: false
+          description: Number of results to return
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-api
+        method: POST
+        description: Create a new API from file, URL, or from scratch
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            type: '{{tools.type}}'
+            apiName: '{{tools.apiName}}'
+            apiVersion: '{{tools.apiVersion}}'
+            apiDescription: '{{tools.apiDescription}}'
+    - name: api-by-id
+      path: /apis/{apiId}
+      description: Individual API management operations
+      operations:
+      - name: get-api
+        method: GET
+        description: Fetch a specific API definition
+        inputParameters:
+        - name: apiId
+          in: path
+          type: string
+          required: true
+          description: Unique identifier of the API
+        - name: format
+          in: query
+          type: string
+          required: false
+          description: 'Export format: swagger, raml, openapi, odata'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: update-api
+        method: PUT
+        description: Update an API definition preserving existing policies
+        inputParameters:
+        - name: apiId
+          in: path
+          type: string
+          required: true
+          description: Unique identifier of the API
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            apiName: '{{tools.apiName}}'
+            apiVersion: '{{tools.apiVersion}}'
+            apiDescription: '{{tools.apiDescription}}'
+      - name: delete-api
+        method: DELETE
+        description: Remove an inactive API from the gateway
+        inputParameters:
+        - name: apiId
+          in: path
+          type: string
+          required: true
+          description: Unique identifier of the API
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-activate
+      path: /apis/{apiId}/activate
+      description: API activation management
+      operations:
+      - name: activate-api
+        method: PUT
+        description: Expose an API to consumers by activating it
+        inputParameters:
+        - name: apiId
+          in: path
+          type: string
+          required: true
+          description: Unique identifier of the API
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-deactivate
+      path: /apis/{apiId}/deactivate
+      description: API deactivation management
+      operations:
+      - name: deactivate-api
+        method: PUT
+        description: Hide an API from consumers by deactivating it
+        inputParameters:
+        - name: apiId
+          in: path
+          type: string
+          required: true
+          description: Unique identifier of the API
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-applications
+      path: /apis/{apiId}/applications
+      description: Applications consuming an API
+      operations:
+      - name: list-api-applications
+        method: GET
+        description: Retrieve all applications registered to consume this API
+        inputParameters:
+        - name: apiId
+          in: path
+          type: string
+          required: true
+          description: Unique identifier of the API
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-publish
+      path: /apis/{apiId}/publish
+      description: API portal publishing
+      operations:
+      - name: publish-api
+        method: PUT
+        description: Register an API to the webMethods Developer Portal
+        inputParameters:
+        - name: apiId
+          in: path
+          type: string
+          required: true
+          description: Unique identifier of the API
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            portalGatewayId: '{{tools.portalGatewayId}}'
+            communities: '{{tools.communities}}'
   exposes:
-    - type: rest
-      port: 8080
-      namespace: webmethods-api-management-api
-      description: "Unified REST API for webMethods API lifecycle management."
-      resources:
-        - path: /v1/apis
-          name: apis
-          description: "Manage APIs in the webMethods API Gateway"
-          operations:
-            - method: GET
-              name: list-apis
-              description: "List all APIs registered in the API Gateway"
-              call: "webmethods-api-gateway.list-apis"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: POST
-              name: create-api
-              description: "Create a new API from spec file or URL"
-              call: "webmethods-api-gateway.create-api"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/apis/{apiId}
-          name: api
-          description: "Individual API management"
-          operations:
-            - method: GET
-              name: get-api
-              description: "Get a specific API definition"
-              call: "webmethods-api-gateway.get-api"
-              with:
-                apiId: "rest.apiId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/apis/{apiId}/activate
-          name: api-activation
-          description: "API activation control"
-          operations:
-            - method: PUT
-              name: activate-api
-              description: "Activate an API to make it available to consumers"
-              call: "webmethods-api-gateway.activate-api"
-              with:
-                apiId: "rest.apiId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/apis/{apiId}/deactivate
-          name: api-deactivation
-          description: "API deactivation control"
-          operations:
-            - method: PUT
-              name: deactivate-api
-              description: "Deactivate an API to hide it from consumers"
-              call: "webmethods-api-gateway.deactivate-api"
-              with:
-                apiId: "rest.apiId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/apis/{apiId}/publish
-          name: api-publishing
-          description: "API portal publishing"
-          operations:
-            - method: PUT
-              name: publish-api
-              description: "Publish an API to the webMethods Developer Portal"
-              call: "webmethods-api-gateway.publish-api"
-              with:
-                apiId: "rest.apiId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/apis/{apiId}/applications
-          name: api-applications
-          description: "Applications consuming the API"
-          operations:
-            - method: GET
-              name: list-api-applications
-              description: "List all applications consuming this API"
-              call: "webmethods-api-gateway.list-api-applications"
-              with:
-                apiId: "rest.apiId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-    - type: mcp
-      port: 9080
-      namespace: webmethods-api-management-mcp
-      transport: http
-      description: "MCP server for AI-assisted webMethods API lifecycle management."
-      tools:
-        - name: list-apis
-          description: "List all APIs registered in the webMethods API Gateway with optional filtering"
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "webmethods-api-gateway.list-apis"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-api
-          description: "Get full details of a specific API including its OpenAPI definition"
-          hints:
-            readOnly: true
-            openWorld: false
-          call: "webmethods-api-gateway.get-api"
-          with:
-            apiId: "tools.apiId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: create-api
-          description: "Create a new API in the API Gateway from an OpenAPI, Swagger, RAML, or WSDL spec"
-          hints:
-            readOnly: false
-            destructive: false
-          call: "webmethods-api-gateway.create-api"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: activate-api
-          description: "Activate an API to expose it to API consumers"
-          hints:
-            readOnly: false
-            destructive: false
-            idempotent: true
-          call: "webmethods-api-gateway.activate-api"
-          with:
-            apiId: "tools.apiId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: deactivate-api
-          description: "Deactivate an API to remove it from consumer visibility"
-          hints:
-            readOnly: false
-            destructive: false
-            idempotent: true
-          call: "webmethods-api-gateway.deactivate-api"
-          with:
-            apiId: "tools.apiId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: publish-api
-          description: "Publish an API to the webMethods Developer Portal for consumer discovery"
-          hints:
-            readOnly: false
-            destructive: false
-          call: "webmethods-api-gateway.publish-api"
-          with:
-            apiId: "tools.apiId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-api-applications
-          description: "List all consumer applications subscribed to a specific API"
-          hints:
-            readOnly: true
-            openWorld: false
-          call: "webmethods-api-gateway.list-api-applications"
-          with:
-            apiId: "tools.apiId"
-          outputParameters:
-            - type: object
-              mapping: "$."
+  - type: rest
+    port: 8080
+    namespace: webmethods-api-management-api
+    description: Unified REST API for webMethods API lifecycle management.
+    resources:
+    - path: /v1/apis
+      name: apis
+      description: Manage APIs in the webMethods API Gateway
+      operations:
+      - method: GET
+        name: list-apis
+        description: List all APIs registered in the API Gateway
+        call: webmethods-api-gateway.list-apis
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create-api
+        description: Create a new API from spec file or URL
+        call: webmethods-api-gateway.create-api
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/apis/{apiId}
+      name: api
+      description: Individual API management
+      operations:
+      - method: GET
+        name: get-api
+        description: Get a specific API definition
+        call: webmethods-api-gateway.get-api
+        with:
+          apiId: rest.apiId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/apis/{apiId}/activate
+      name: api-activation
+      description: API activation control
+      operations:
+      - method: PUT
+        name: activate-api
+        description: Activate an API to make it available to consumers
+        call: webmethods-api-gateway.activate-api
+        with:
+          apiId: rest.apiId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/apis/{apiId}/deactivate
+      name: api-deactivation
+      description: API deactivation control
+      operations:
+      - method: PUT
+        name: deactivate-api
+        description: Deactivate an API to hide it from consumers
+        call: webmethods-api-gateway.deactivate-api
+        with:
+          apiId: rest.apiId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/apis/{apiId}/publish
+      name: api-publishing
+      description: API portal publishing
+      operations:
+      - method: PUT
+        name: publish-api
+        description: Publish an API to the webMethods Developer Portal
+        call: webmethods-api-gateway.publish-api
+        with:
+          apiId: rest.apiId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/apis/{apiId}/applications
+      name: api-applications
+      description: Applications consuming the API
+      operations:
+      - method: GET
+        name: list-api-applications
+        description: List all applications consuming this API
+        call: webmethods-api-gateway.list-api-applications
+        with:
+          apiId: rest.apiId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9080
+    namespace: webmethods-api-management-mcp
+    transport: http
+    description: MCP server for AI-assisted webMethods API lifecycle management.
+    tools:
+    - name: list-apis
+      description: List all APIs registered in the webMethods API Gateway with optional filtering
+      hints:
+        readOnly: true
+        openWorld: true
+      call: webmethods-api-gateway.list-apis
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-api
+      description: Get full details of a specific API including its OpenAPI definition
+      hints:
+        readOnly: true
+        openWorld: false
+      call: webmethods-api-gateway.get-api
+      with:
+        apiId: tools.apiId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-api
+      description: Create a new API in the API Gateway from an OpenAPI, Swagger, RAML, or WSDL spec
+      hints:
+        readOnly: false
+        destructive: false
+      call: webmethods-api-gateway.create-api
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: activate-api
+      description: Activate an API to expose it to API consumers
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: webmethods-api-gateway.activate-api
+      with:
+        apiId: tools.apiId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deactivate-api
+      description: Deactivate an API to remove it from consumer visibility
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: webmethods-api-gateway.deactivate-api
+      with:
+        apiId: tools.apiId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: publish-api
+      description: Publish an API to the webMethods Developer Portal for consumer discovery
+      hints:
+        readOnly: false
+        destructive: false
+      call: webmethods-api-gateway.publish-api
+      with:
+        apiId: tools.apiId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-api-applications
+      description: List all consumer applications subscribed to a specific API
+      hints:
+        readOnly: true
+        openWorld: false
+      call: webmethods-api-gateway.list-api-applications
+      with:
+        apiId: tools.apiId
+      outputParameters:
+      - type: object
+        mapping: $.
