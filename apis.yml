@@ -110,6 +110,17 @@ common:
   - type: Vocabulary
     url: https://raw.githubusercontent.com/api-evangelist/software-ag/refs/heads/main/vocabulary/software-ag-vocabulary.yml
 
+  - type: Integrations
+    url: https://www.softwareag.com/en/integrations/
+integrations:
+  - name: International User Group (IUG) Conference 2026
+  - name: Software AG
+  - name: Page not found
+  - name: SoftwareAG
+  - name: LinkedIn
+  - name: Facebook
+  - name: Twitter/X
+  - name: YouTube
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
