@@ -1,0 +1,82 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: webMethods API Gateway Service Management API — Applications
+  description: 'webMethods API Gateway Service Management API — Applications. 1 operations. Lead operation: List API Applications.
+    Self-contained Naftiko capability covering one Software Ag business surface.'
+  tags:
+  - Software Ag
+  - Applications
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SOFTWARE_AG_API_KEY: SOFTWARE_AG_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: webmethods-api-gateway-applications
+    baseUri: http://localhost:5555/rest/apigateway
+    description: webMethods API Gateway Service Management API — Applications business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: apis-apiId-applications
+      path: /apis/{apiId}/applications
+      operations:
+      - name: getapplications
+        method: GET
+        description: List API Applications
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: apiId
+          in: path
+          type: string
+          description: Unique identifier of the API
+          required: true
+    authentication:
+      type: basic
+      username: '{{env.SOFTWARE_AG_USER}}'
+      password: '{{env.SOFTWARE_AG_PASS}}'
+  exposes:
+  - type: rest
+    namespace: webmethods-api-gateway-applications-rest
+    port: 8080
+    description: REST adapter for webMethods API Gateway Service Management API — Applications. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/apis/{apiid}/applications
+      name: apis-apiid-applications
+      description: REST surface for apis-apiId-applications.
+      operations:
+      - method: GET
+        name: getapplications
+        description: List API Applications
+        call: webmethods-api-gateway-applications.getapplications
+        with:
+          apiId: rest.apiId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: webmethods-api-gateway-applications-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for webMethods API Gateway Service Management API — Applications. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: list-api-applications
+      description: List API Applications
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: webmethods-api-gateway-applications.getapplications
+      with:
+        apiId: tools.apiId
+      outputParameters:
+      - type: object
+        mapping: $.
