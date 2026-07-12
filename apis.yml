@@ -88,6 +88,10 @@ apis:
       - type: Documentation
         url: https://documentation.softwareag.com/
 common:
+  - type: DomainSecurity
+    url: security/software-ag-domain-security.yml
+  - type: Authentication
+    url: authentication/software-ag-authentication.yml
   - type: Portal
     url: https://developer.softwareag.com/
   - type: Website
