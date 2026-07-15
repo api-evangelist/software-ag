@@ -88,6 +88,8 @@ apis:
       - type: Documentation
         url: https://documentation.softwareag.com/
 common:
+  - type: AgenticAccess
+    url: agentic-access/software-ag-agentic-access.yml
   - type: DomainSecurity
     url: security/software-ag-domain-security.yml
   - type: Authentication
