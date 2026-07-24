@@ -1,0 +1,68 @@
+openapi: 3.0.0
+info:
+  title: webMethods API Gateway Service Management APIs Policies API
+  description: The webMethods API Gateway Service Management API provides REST endpoints for managing APIs within the Software AG API Gateway platform. It supports creating, reading, updating, and deleting REST, SOAP, WebSocket, and OData APIs, as well as managing policies, applications, gateway endpoints, and publishing APIs to the Developer Portal.
+  version: '11.0'
+  contact:
+    name: Software AG Developer Community
+    url: https://techcommunity.softwareag.com/
+  license:
+    name: Software AG License
+    url: https://www.softwareag.com/
+servers:
+- url: http://localhost:5555/rest/apigateway
+  description: Local webMethods API Gateway instance
+security:
+- basicAuth: []
+tags:
+- name: Policies
+  description: Policy and scope management
+paths:
+  /apis/{apiId}/globalPolicies:
+    get:
+      operationId: getAssociatedGlobalPolicies
+      summary: Get Global Policies
+      description: Retrieve all global policies applicable to this API.
+      tags:
+      - Policies
+      parameters:
+      - name: apiId
+        in: path
+        required: true
+        description: Unique identifier of the API
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Global policies retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PolicyListResponse'
+        '404':
+          description: API not found
+components:
+  schemas:
+    PolicyListResponse:
+      type: object
+      properties:
+        policies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Policy'
+    Policy:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        enabled:
+          type: boolean
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Basic authentication with API Gateway administrator credentials

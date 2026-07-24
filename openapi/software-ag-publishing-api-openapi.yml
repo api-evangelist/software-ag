@@ -1,0 +1,133 @@
+openapi: 3.0.0
+info:
+  title: webMethods API Gateway Service Management APIs Publishing API
+  description: The webMethods API Gateway Service Management API provides REST endpoints for managing APIs within the Software AG API Gateway platform. It supports creating, reading, updating, and deleting REST, SOAP, WebSocket, and OData APIs, as well as managing policies, applications, gateway endpoints, and publishing APIs to the Developer Portal.
+  version: '11.0'
+  contact:
+    name: Software AG Developer Community
+    url: https://techcommunity.softwareag.com/
+  license:
+    name: Software AG License
+    url: https://www.softwareag.com/
+servers:
+- url: http://localhost:5555/rest/apigateway
+  description: Local webMethods API Gateway instance
+security:
+- basicAuth: []
+tags:
+- name: Publishing
+  description: API portal publishing operations
+paths:
+  /apis/{apiId}/publish:
+    put:
+      operationId: publishAPI
+      summary: Publish API to Portal
+      description: Register an API to the webMethods Developer Portal for consumer discovery.
+      tags:
+      - Publishing
+      parameters:
+      - name: apiId
+        in: path
+        required: true
+        description: Unique identifier of the API
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublishAPIRequest'
+      responses:
+        '200':
+          description: API published successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIResponse'
+        '400':
+          description: Invalid publish request
+        '404':
+          description: API not found
+components:
+  schemas:
+    APIResponse:
+      type: object
+      properties:
+        apiResponse:
+          type: object
+          properties:
+            api:
+              $ref: '#/components/schemas/API'
+    API:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique API identifier
+        apiName:
+          type: string
+          description: Name of the API
+        apiVersion:
+          type: string
+          description: Version of the API
+        apiDescription:
+          type: string
+          description: Description of the API
+        type:
+          type: string
+          enum:
+          - REST
+          - SOAP
+          - WEBSOCKET
+          - ODATA
+          description: API type
+        isActive:
+          type: boolean
+          description: Whether the API is currently active
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags associated with the API
+        systemVersion:
+          type: integer
+          description: Internal system version number
+        maturityState:
+          type: string
+          enum:
+          - BETA
+          - RELEASED
+          - DEPRECATED
+          description: API maturity state
+        created:
+          type: string
+          format: date-time
+          description: API creation timestamp
+        modified:
+          type: string
+          format: date-time
+          description: API last modification timestamp
+    PublishAPIRequest:
+      type: object
+      required:
+      - portalGatewayId
+      properties:
+        portalGatewayId:
+          type: string
+          description: ID of the API Portal gateway to publish to
+        communities:
+          type: array
+          items:
+            type: string
+          description: Community names to publish the API to
+        endpoints:
+          type: array
+          items:
+            type: string
+          description: Custom endpoint URLs for the portal
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Basic authentication with API Gateway administrator credentials

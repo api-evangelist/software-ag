@@ -1,0 +1,77 @@
+openapi: 3.0.0
+info:
+  title: webMethods API Gateway Service Management APIs Applications API
+  description: The webMethods API Gateway Service Management API provides REST endpoints for managing APIs within the Software AG API Gateway platform. It supports creating, reading, updating, and deleting REST, SOAP, WebSocket, and OData APIs, as well as managing policies, applications, gateway endpoints, and publishing APIs to the Developer Portal.
+  version: '11.0'
+  contact:
+    name: Software AG Developer Community
+    url: https://techcommunity.softwareag.com/
+  license:
+    name: Software AG License
+    url: https://www.softwareag.com/
+servers:
+- url: http://localhost:5555/rest/apigateway
+  description: Local webMethods API Gateway instance
+security:
+- basicAuth: []
+tags:
+- name: Applications
+  description: Application and consumer management
+paths:
+  /apis/{apiId}/applications:
+    get:
+      operationId: getApplications
+      summary: List API Applications
+      description: Retrieve all applications that are registered to consume this API.
+      tags:
+      - Applications
+      parameters:
+      - name: apiId
+        in: path
+        required: true
+        description: Unique identifier of the API
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Applications retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationListResponse'
+        '404':
+          description: API not found
+components:
+  schemas:
+    ApplicationListResponse:
+      type: object
+      properties:
+        applications:
+          type: array
+          items:
+            $ref: '#/components/schemas/Application'
+    Application:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        owner:
+          type: string
+        identifiers:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              value:
+                type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Basic authentication with API Gateway administrator credentials

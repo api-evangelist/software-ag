@@ -1,12 +1,7 @@
 openapi: 3.0.0
 info:
-  title: webMethods API Gateway Service Management API
-  description: >-
-    The webMethods API Gateway Service Management API provides REST endpoints for
-    managing APIs within the Software AG API Gateway platform. It supports creating,
-    reading, updating, and deleting REST, SOAP, WebSocket, and OData APIs, as well
-    as managing policies, applications, gateway endpoints, and publishing APIs to
-    the Developer Portal.
+  title: webMethods API Gateway Service Management APIs API
+  description: The webMethods API Gateway Service Management API provides REST endpoints for managing APIs within the Software AG API Gateway platform. It supports creating, reading, updating, and deleting REST, SOAP, WebSocket, and OData APIs, as well as managing policies, applications, gateway endpoints, and publishing APIs to the Developer Portal.
   version: '11.0'
   contact:
     name: Software AG Developer Community
@@ -14,24 +9,14 @@ info:
   license:
     name: Software AG License
     url: https://www.softwareag.com/
-
 servers:
-  - url: http://localhost:5555/rest/apigateway
-    description: Local webMethods API Gateway instance
-
+- url: http://localhost:5555/rest/apigateway
+  description: Local webMethods API Gateway instance
 security:
-  - basicAuth: []
-
+- basicAuth: []
 tags:
-  - name: APIs
-    description: API lifecycle management operations
-  - name: Applications
-    description: Application and consumer management
-  - name: Policies
-    description: Policy and scope management
-  - name: Publishing
-    description: API portal publishing operations
-
+- name: APIs
+  description: API lifecycle management operations
 paths:
   /apis:
     get:
@@ -39,28 +24,28 @@ paths:
       summary: List All APIs
       description: Retrieve all or a filtered subset of APIs registered in the API Gateway with pagination support.
       tags:
-        - APIs
+      - APIs
       parameters:
-        - name: apiIds
-          in: query
-          description: Comma-separated list of API IDs to filter
-          required: false
-          schema:
-            type: string
-        - name: from
-          in: query
-          description: Starting index for pagination
-          required: false
-          schema:
-            type: integer
-            default: 0
-        - name: size
-          in: query
-          description: Number of results to return
-          required: false
-          schema:
-            type: integer
-            default: 25
+      - name: apiIds
+        in: query
+        description: Comma-separated list of API IDs to filter
+        required: false
+        schema:
+          type: string
+      - name: from
+        in: query
+        description: Starting index for pagination
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: size
+        in: query
+        description: Number of results to return
+        required: false
+        schema:
+          type: integer
+          default: 25
       responses:
         '200':
           description: List of APIs retrieved successfully
@@ -75,7 +60,7 @@ paths:
       summary: Create API
       description: Create a new API in the API Gateway from a file, URL, or from scratch. Supports REST, SOAP, WebSocket, and OData APIs.
       tags:
-        - APIs
+      - APIs
       requestBody:
         required: true
         content:
@@ -98,7 +83,11 @@ paths:
                   type: string
                 type:
                   type: string
-                  enum: [REST, SOAP, WEBSOCKET, ODATA]
+                  enum:
+                  - REST
+                  - SOAP
+                  - WEBSOCKET
+                  - ODATA
       responses:
         '200':
           description: API created successfully
@@ -115,21 +104,21 @@ paths:
       summary: Delete Multiple APIs
       description: Remove multiple inactive APIs from the API Gateway.
       tags:
-        - APIs
+      - APIs
       parameters:
-        - name: apiIds
-          in: query
-          required: true
-          description: Comma-separated list of API IDs to delete
-          schema:
-            type: string
-        - name: forceDelete
-          in: query
-          required: false
-          description: Force delete even if API has active subscriptions
-          schema:
-            type: boolean
-            default: false
+      - name: apiIds
+        in: query
+        required: true
+        description: Comma-separated list of API IDs to delete
+        schema:
+          type: string
+      - name: forceDelete
+        in: query
+        required: false
+        description: Force delete even if API has active subscriptions
+        schema:
+          type: boolean
+          default: false
       responses:
         '204':
           description: APIs deleted successfully
@@ -137,28 +126,31 @@ paths:
           description: Invalid request
         '401':
           description: Unauthorized
-
   /apis/{apiId}:
     get:
       operationId: getAPI
       summary: Get API
       description: Fetch a specific API definition from the API Gateway with optional format export.
       tags:
-        - APIs
+      - APIs
       parameters:
-        - name: apiId
-          in: path
-          required: true
-          description: Unique identifier of the API
-          schema:
-            type: string
-        - name: format
-          in: query
-          required: false
-          description: Export format for the API definition
-          schema:
-            type: string
-            enum: [swagger, raml, openapi, odata]
+      - name: apiId
+        in: path
+        required: true
+        description: Unique identifier of the API
+        schema:
+          type: string
+      - name: format
+        in: query
+        required: false
+        description: Export format for the API definition
+        schema:
+          type: string
+          enum:
+          - swagger
+          - raml
+          - openapi
+          - odata
       responses:
         '200':
           description: API retrieved successfully
@@ -173,21 +165,21 @@ paths:
       summary: Update API
       description: Update an API definition in the API Gateway, preserving existing policies and settings.
       tags:
-        - APIs
+      - APIs
       parameters:
-        - name: apiId
-          in: path
-          required: true
-          description: Unique identifier of the API
-          schema:
-            type: string
-        - name: overwriteTags
-          in: query
-          required: false
-          description: Whether to overwrite existing tags
-          schema:
-            type: boolean
-            default: false
+      - name: apiId
+        in: path
+        required: true
+        description: Unique identifier of the API
+        schema:
+          type: string
+      - name: overwriteTags
+        in: query
+        required: false
+        description: Whether to overwrite existing tags
+        schema:
+          type: boolean
+          default: false
       requestBody:
         required: true
         content:
@@ -210,14 +202,14 @@ paths:
       summary: Delete API
       description: Remove an inactive API from the API Gateway.
       tags:
-        - APIs
+      - APIs
       parameters:
-        - name: apiId
-          in: path
-          required: true
-          description: Unique identifier of the API
-          schema:
-            type: string
+      - name: apiId
+        in: path
+        required: true
+        description: Unique identifier of the API
+        schema:
+          type: string
       responses:
         '204':
           description: API deleted successfully
@@ -225,21 +217,20 @@ paths:
           description: API is active and cannot be deleted
         '404':
           description: API not found
-
   /apis/{apiId}/activate:
     put:
       operationId: activateAPI
       summary: Activate API
       description: Expose an API to consumers by activating it in the API Gateway.
       tags:
-        - APIs
+      - APIs
       parameters:
-        - name: apiId
-          in: path
-          required: true
-          description: Unique identifier of the API
-          schema:
-            type: string
+      - name: apiId
+        in: path
+        required: true
+        description: Unique identifier of the API
+        schema:
+          type: string
       responses:
         '200':
           description: API activated successfully
@@ -249,21 +240,20 @@ paths:
                 $ref: '#/components/schemas/APIResponse'
         '404':
           description: API not found
-
   /apis/{apiId}/deactivate:
     put:
       operationId: deactivateAPI
       summary: Deactivate API
       description: Hide an API from consumers by deactivating it in the API Gateway.
       tags:
-        - APIs
+      - APIs
       parameters:
-        - name: apiId
-          in: path
-          required: true
-          description: Unique identifier of the API
-          schema:
-            type: string
+      - name: apiId
+        in: path
+        required: true
+        description: Unique identifier of the API
+        schema:
+          type: string
       responses:
         '200':
           description: API deactivated successfully
@@ -273,101 +263,20 @@ paths:
                 $ref: '#/components/schemas/APIResponse'
         '404':
           description: API not found
-
-  /apis/{apiId}/applications:
-    get:
-      operationId: getApplications
-      summary: List API Applications
-      description: Retrieve all applications that are registered to consume this API.
-      tags:
-        - Applications
-      parameters:
-        - name: apiId
-          in: path
-          required: true
-          description: Unique identifier of the API
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Applications retrieved successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApplicationListResponse'
-        '404':
-          description: API not found
-
-  /apis/{apiId}/globalPolicies:
-    get:
-      operationId: getAssociatedGlobalPolicies
-      summary: Get Global Policies
-      description: Retrieve all global policies applicable to this API.
-      tags:
-        - Policies
-      parameters:
-        - name: apiId
-          in: path
-          required: true
-          description: Unique identifier of the API
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Global policies retrieved successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PolicyListResponse'
-        '404':
-          description: API not found
-
-  /apis/{apiId}/publish:
-    put:
-      operationId: publishAPI
-      summary: Publish API to Portal
-      description: Register an API to the webMethods Developer Portal for consumer discovery.
-      tags:
-        - Publishing
-      parameters:
-        - name: apiId
-          in: path
-          required: true
-          description: Unique identifier of the API
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PublishAPIRequest'
-      responses:
-        '200':
-          description: API published successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIResponse'
-        '400':
-          description: Invalid publish request
-        '404':
-          description: API not found
-
   /apis/{apiId}/gatewayEndpoints:
     put:
       operationId: updateGatewayEndpoints
       summary: Update Gateway Endpoints
       description: Create, update, or delete custom gateway endpoints for an API.
       tags:
-        - APIs
+      - APIs
       parameters:
-        - name: apiId
-          in: path
-          required: true
-          description: Unique identifier of the API
-          schema:
-            type: string
+      - name: apiId
+        in: path
+        required: true
+        description: Unique identifier of the API
+        schema:
+          type: string
       requestBody:
         required: true
         content:
@@ -383,21 +292,20 @@ paths:
                 $ref: '#/components/schemas/APIResponse'
         '404':
           description: API not found
-
   /apis/{apiId}/implementation:
     put:
       operationId: updateAPIImplementation
       summary: Update API Implementation
       description: Update the backend implementation endpoints and maturity state of an API.
       tags:
-        - APIs
+      - APIs
       parameters:
-        - name: apiId
-          in: path
-          required: true
-          description: Unique identifier of the API
-          schema:
-            type: string
+      - name: apiId
+        in: path
+        required: true
+        description: Unique identifier of the API
+        schema:
+          type: string
       requestBody:
         required: true
         content:
@@ -409,101 +317,96 @@ paths:
           description: Implementation updated successfully
         '404':
           description: API not found
-
   /apis/{apiId}/mock/enable:
     put:
       operationId: enableAPIMock
       summary: Enable API Mocking
       description: Enable mock responses for an API for testing purposes.
       tags:
-        - APIs
+      - APIs
       parameters:
-        - name: apiId
-          in: path
-          required: true
-          description: Unique identifier of the API
-          schema:
-            type: string
+      - name: apiId
+        in: path
+        required: true
+        description: Unique identifier of the API
+        schema:
+          type: string
       responses:
         '200':
           description: API mocking enabled
         '404':
           description: API not found
-
   /apis/{apiId}/mock/disable:
     put:
       operationId: disableAPIMock
       summary: Disable API Mocking
       description: Disable mock responses for an API.
       tags:
-        - APIs
+      - APIs
       parameters:
-        - name: apiId
-          in: path
-          required: true
-          description: Unique identifier of the API
-          schema:
-            type: string
+      - name: apiId
+        in: path
+        required: true
+        description: Unique identifier of the API
+        schema:
+          type: string
       responses:
         '200':
           description: API mocking disabled
         '404':
           description: API not found
-
   /apis/{apiId}/tracing/enable:
     put:
       operationId: enableAPITracing
       summary: Enable API Tracing
       description: Enable diagnostic tracing for an API to capture request/response details.
       tags:
-        - APIs
+      - APIs
       parameters:
-        - name: apiId
-          in: path
-          required: true
-          description: Unique identifier of the API
-          schema:
-            type: string
+      - name: apiId
+        in: path
+        required: true
+        description: Unique identifier of the API
+        schema:
+          type: string
       responses:
         '200':
           description: API tracing enabled
         '404':
           description: API not found
-
   /apis/{apiId}/tracing/disable:
     put:
       operationId: disableAPITracing
       summary: Disable API Tracing
       description: Disable diagnostic tracing for an API.
       tags:
-        - APIs
+      - APIs
       parameters:
-        - name: apiId
-          in: path
-          required: true
-          description: Unique identifier of the API
-          schema:
-            type: string
+      - name: apiId
+        in: path
+        required: true
+        description: Unique identifier of the API
+        schema:
+          type: string
       responses:
         '200':
           description: API tracing disabled
         '404':
           description: API not found
-
   /apis/{apiId}/providerspecification:
     get:
       operationId: downloadProviderSpecification
       summary: Download Provider Specification
       description: Export the API specification without gateway endpoint modifications.
       tags:
-        - APIs
+      - APIs
       parameters:
-        - name: apiId
-          in: path
-          required: true
-          description: Unique identifier of the API
-          schema:
-            type: string
+      - name: apiId
+        in: path
+        required: true
+        description: Unique identifier of the API
+        schema:
+          type: string
       responses:
         '200':
           description: Provider specification downloaded
@@ -513,21 +416,20 @@ paths:
                 type: object
         '404':
           description: API not found
-
   /apis/{apiId}/packages:
     get:
       operationId: getAPIPackages
       summary: List API Packages
       description: Retrieve all packages that include this API.
       tags:
-        - APIs
+      - APIs
       parameters:
-        - name: apiId
-          in: path
-          required: true
-          description: Unique identifier of the API
-          schema:
-            type: string
+      - name: apiId
+        in: path
+        required: true
+        description: Unique identifier of the API
+        schema:
+          type: string
       responses:
         '200':
           description: Packages retrieved successfully
@@ -537,15 +439,15 @@ paths:
                 $ref: '#/components/schemas/PackageListResponse'
         '404':
           description: API not found
-
 components:
-  securitySchemes:
-    basicAuth:
-      type: http
-      scheme: basic
-      description: Basic authentication with API Gateway administrator credentials
-
   schemas:
+    PackageListResponse:
+      type: object
+      properties:
+        packages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Package'
     APIListResponse:
       type: object
       properties:
@@ -559,7 +461,61 @@ components:
             count:
               type: integer
               description: Total number of APIs matching the filter
-
+    ImplementationRequest:
+      type: object
+      properties:
+        endpoints:
+          type: array
+          items:
+            type: object
+            properties:
+              url:
+                type: string
+              isDefault:
+                type: boolean
+        maturityState:
+          type: string
+          enum:
+          - BETA
+          - RELEASED
+          - DEPRECATED
+    Package:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+    CreateAPIRequest:
+      type: object
+      required:
+      - type
+      - apiName
+      properties:
+        type:
+          type: string
+          enum:
+          - REST
+          - SOAP
+          - WEBSOCKET
+          - ODATA
+        apiName:
+          type: string
+        apiVersion:
+          type: string
+          default: '1.0'
+        apiDescription:
+          type: string
+        swagger:
+          type: string
+          description: URL to a Swagger/OpenAPI spec
+        url:
+          type: string
+          description: URL to the API spec or backend service
     APIResponse:
       type: object
       properties:
@@ -568,7 +524,6 @@ components:
           properties:
             api:
               $ref: '#/components/schemas/API'
-
     API:
       type: object
       properties:
@@ -586,7 +541,11 @@ components:
           description: Description of the API
         type:
           type: string
-          enum: [REST, SOAP, WEBSOCKET, ODATA]
+          enum:
+          - REST
+          - SOAP
+          - WEBSOCKET
+          - ODATA
           description: API type
         isActive:
           type: boolean
@@ -601,7 +560,10 @@ components:
           description: Internal system version number
         maturityState:
           type: string
-          enum: [BETA, RELEASED, DEPRECATED]
+          enum:
+          - BETA
+          - RELEASED
+          - DEPRECATED
           description: API maturity state
         created:
           type: string
@@ -611,30 +573,20 @@ components:
           type: string
           format: date-time
           description: API last modification timestamp
-
-    CreateAPIRequest:
+    GatewayEndpointsRequest:
       type: object
-      required:
-        - type
-        - apiName
       properties:
-        type:
-          type: string
-          enum: [REST, SOAP, WEBSOCKET, ODATA]
-        apiName:
-          type: string
-        apiVersion:
-          type: string
-          default: '1.0'
-        apiDescription:
-          type: string
-        swagger:
-          type: string
-          description: URL to a Swagger/OpenAPI spec
-        url:
-          type: string
-          description: URL to the API spec or backend service
-
+        gatewayEndpoints:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              url:
+                type: string
+              isDefault:
+                type: boolean
     UpdateAPIRequest:
       type: object
       properties:
@@ -650,123 +602,12 @@ components:
             type: string
         maturityState:
           type: string
-          enum: [BETA, RELEASED, DEPRECATED]
-
-    PublishAPIRequest:
-      type: object
-      required:
-        - portalGatewayId
-      properties:
-        portalGatewayId:
-          type: string
-          description: ID of the API Portal gateway to publish to
-        communities:
-          type: array
-          items:
-            type: string
-          description: Community names to publish the API to
-        endpoints:
-          type: array
-          items:
-            type: string
-          description: Custom endpoint URLs for the portal
-
-    GatewayEndpointsRequest:
-      type: object
-      properties:
-        gatewayEndpoints:
-          type: array
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-              url:
-                type: string
-              isDefault:
-                type: boolean
-
-    ImplementationRequest:
-      type: object
-      properties:
-        endpoints:
-          type: array
-          items:
-            type: object
-            properties:
-              url:
-                type: string
-              isDefault:
-                type: boolean
-        maturityState:
-          type: string
-          enum: [BETA, RELEASED, DEPRECATED]
-
-    ApplicationListResponse:
-      type: object
-      properties:
-        applications:
-          type: array
-          items:
-            $ref: '#/components/schemas/Application'
-
-    Application:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        owner:
-          type: string
-        identifiers:
-          type: array
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-              value:
-                type: string
-
-    PolicyListResponse:
-      type: object
-      properties:
-        policies:
-          type: array
-          items:
-            $ref: '#/components/schemas/Policy'
-
-    Policy:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        type:
-          type: string
-        enabled:
-          type: boolean
-
-    PackageListResponse:
-      type: object
-      properties:
-        packages:
-          type: array
-          items:
-            $ref: '#/components/schemas/Package'
-
-    Package:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        status:
-          type: string
+          enum:
+          - BETA
+          - RELEASED
+          - DEPRECATED
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Basic authentication with API Gateway administrator credentials
