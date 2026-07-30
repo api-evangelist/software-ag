@@ -6,7 +6,20 @@ description: >-
   API Gateway, Developer Portal, Integration Server, and cloud-native integration services. Software AG was acquired by
   IBM in 2024.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: enterprise
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Enterprise · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/software-ag.png
 tags:
   - API Management
   - Enterprise Integration
@@ -19,74 +32,143 @@ created: '2026-03-16'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: software-ag:webmethods-api-gateway
-    name: webMethods API Gateway Service Management API
-    description: >-
-      The webMethods API Gateway Service Management API provides REST endpoints for managing APIs within the API Gateway
-      platform. It supports creating, reading, updating, and deleting REST, SOAP, WebSocket, and OData APIs, as well as
-      managing policies, applications, and gateway endpoints.
-    humanURL: >-
+- aid: software-ag:webmethods-developer-portal
+  name: webMethods Developer Portal
+  description: >-
+    The webMethods Developer Portal provides a marketplace for publishing and discovering REST, SOAP,
+    and OData APIs for third-party developers and partners. It enables developer onboarding, API subscription
+    management, and API consumption analytics.
+  humanURL: >-
+    https://www.softwareag.com/en_corporate/resources/api/ds/webmethods-developer-portal.html
+  baseURL: https://www.softwareag.com/
+  tags:
+  - Developer Portal
+  - API Management
+  - API Marketplace
+  - webMethods
+  properties:
+  - type: Documentation
+    url: >-
       https://documentation.softwareag.com/webmethods/compendiums/v10-5/C_API_Management/api-mgmt-comp/co-oview_what_is_api_portal.html
-    baseURL: http://localhost:5555/rest/apigateway
-    tags:
-      - API Management
-      - API Gateway
-      - Enterprise Integration
-      - webMethods
-    properties:
-      - type: Documentation
-        url: >-
-          https://documentation.softwareag.com/webmethods/compendiums/v10-5/C_API_Management/api-mgmt-comp/gtw_manage_apis.html
-      - type: OpenAPI
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/software-ag/refs/heads/main/openapi/webmethods-api-gateway-openapi.yml
-      - type: GitHubRepository
-        url: https://github.com/SoftwareAG/webmethods-api-gateway
-      - type: JSONSchema
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/software-ag/refs/heads/main/json-schema/webmethods-api-schema.json
-      - type: JSONStructure
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/software-ag/refs/heads/main/json-structure/webmethods-api-structure.json
-      - type: SpectralRules
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/software-ag/refs/heads/main/rules/webmethods-api-gateway-rules.yml
-  - aid: software-ag:webmethods-developer-portal
-    name: webMethods Developer Portal
-    description: >-
-      The webMethods Developer Portal provides a marketplace for publishing and discovering REST, SOAP, and OData APIs
-      for third-party developers and partners. It enables developer onboarding, API subscription management, and API
-      consumption analytics.
-    humanURL: https://www.softwareag.com/en_corporate/resources/api/ds/webmethods-developer-portal.html
-    baseURL: https://www.softwareag.com/
-    tags:
-      - Developer Portal
-      - API Management
-      - API Marketplace
-      - webMethods
-    properties:
-      - type: Documentation
-        url: >-
-          https://documentation.softwareag.com/webmethods/compendiums/v10-5/C_API_Management/api-mgmt-comp/co-oview_what_is_api_portal.html
-      - type: GitHubRepository
-        url: https://github.com/SoftwareAG/webmethods-developer-portal
-  - aid: software-ag:webmethods-integration-server
-    name: webMethods Integration Server
-    description: >-
-      The webMethods Integration Server is a comprehensive integration platform that enables connectivity between
-      enterprise applications, databases, legacy systems, and cloud services. It provides flow services, adapters, and
-      REST API exposure for business process integration.
-    humanURL: https://documentation.softwareag.com/
-    baseURL: https://www.softwareag.com/
-    tags:
-      - Integration
-      - Enterprise
-      - Middleware
-      - webMethods
-      - iPaaS
-    properties:
-      - type: Documentation
-        url: https://documentation.softwareag.com/
+  - type: GitHubRepository
+    url: https://github.com/SoftwareAG/webmethods-developer-portal
+- aid: software-ag:webmethods-integration-server
+  name: webMethods Integration Server
+  description: >-
+    The webMethods Integration Server is a comprehensive integration platform that enables connectivity
+    between enterprise applications, databases, legacy systems, and cloud services. It provides flow services,
+    adapters, and REST API exposure for business process integration.
+  humanURL: https://documentation.softwareag.com/
+  baseURL: https://www.softwareag.com/
+  tags:
+  - Integration
+  - Enterprise
+  - Middleware
+  - webMethods
+  - iPaaS
+  properties:
+  - type: Documentation
+    url: https://documentation.softwareag.com/
+- aid: software-ag:software-ag-apis-api
+  name: Software AG APIs API
+  description: API lifecycle management operations
+  humanURL: >-
+    https://documentation.softwareag.com/webmethods/compendiums/v10-5/C_API_Management/api-mgmt-comp/co-oview_what_is_api_portal.html
+  baseURL: http://localhost:5555/rest/apigateway
+  tags:
+  - APIs
+  properties:
+  - type: OpenAPI
+    url: openapi/software-ag-apis-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://documentation.softwareag.com/webmethods/compendiums/v10-5/C_API_Management/api-mgmt-comp/gtw_manage_apis.html
+  - type: GitHubRepository
+    url: https://github.com/SoftwareAG/webmethods-api-gateway
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/software-ag/refs/heads/main/json-schema/webmethods-api-schema.json
+  - type: JSONStructure
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/software-ag/refs/heads/main/json-structure/webmethods-api-structure.json
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/software-ag/refs/heads/main/rules/webmethods-api-gateway-rules.yml
+- aid: software-ag:software-ag-applications-api
+  name: Software AG Applications API
+  description: Application and consumer management
+  humanURL: >-
+    https://documentation.softwareag.com/webmethods/compendiums/v10-5/C_API_Management/api-mgmt-comp/co-oview_what_is_api_portal.html
+  baseURL: http://localhost:5555/rest/apigateway
+  tags:
+  - Applications
+  properties:
+  - type: OpenAPI
+    url: openapi/software-ag-applications-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://documentation.softwareag.com/webmethods/compendiums/v10-5/C_API_Management/api-mgmt-comp/gtw_manage_apis.html
+  - type: GitHubRepository
+    url: https://github.com/SoftwareAG/webmethods-api-gateway
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/software-ag/refs/heads/main/json-schema/webmethods-api-schema.json
+  - type: JSONStructure
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/software-ag/refs/heads/main/json-structure/webmethods-api-structure.json
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/software-ag/refs/heads/main/rules/webmethods-api-gateway-rules.yml
+- aid: software-ag:software-ag-policies-api
+  name: Software AG Policies API
+  description: Policy and scope management
+  humanURL: >-
+    https://documentation.softwareag.com/webmethods/compendiums/v10-5/C_API_Management/api-mgmt-comp/co-oview_what_is_api_portal.html
+  baseURL: http://localhost:5555/rest/apigateway
+  tags:
+  - Policies
+  properties:
+  - type: OpenAPI
+    url: openapi/software-ag-policies-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://documentation.softwareag.com/webmethods/compendiums/v10-5/C_API_Management/api-mgmt-comp/gtw_manage_apis.html
+  - type: GitHubRepository
+    url: https://github.com/SoftwareAG/webmethods-api-gateway
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/software-ag/refs/heads/main/json-schema/webmethods-api-schema.json
+  - type: JSONStructure
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/software-ag/refs/heads/main/json-structure/webmethods-api-structure.json
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/software-ag/refs/heads/main/rules/webmethods-api-gateway-rules.yml
+- aid: software-ag:software-ag-publishing-api
+  name: Software AG Publishing API
+  description: API portal publishing operations
+  humanURL: >-
+    https://documentation.softwareag.com/webmethods/compendiums/v10-5/C_API_Management/api-mgmt-comp/co-oview_what_is_api_portal.html
+  baseURL: http://localhost:5555/rest/apigateway
+  tags:
+  - Publishing
+  properties:
+  - type: OpenAPI
+    url: openapi/software-ag-publishing-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://documentation.softwareag.com/webmethods/compendiums/v10-5/C_API_Management/api-mgmt-comp/gtw_manage_apis.html
+  - type: GitHubRepository
+    url: https://github.com/SoftwareAG/webmethods-api-gateway
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/software-ag/refs/heads/main/json-schema/webmethods-api-schema.json
+  - type: JSONStructure
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/software-ag/refs/heads/main/json-structure/webmethods-api-structure.json
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/software-ag/refs/heads/main/rules/webmethods-api-gateway-rules.yml
 common:
   - type: AgenticAccess
     url: agentic-access/software-ag-agentic-access.yml
