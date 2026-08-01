@@ -1,0 +1,20 @@
+{
+  "provider": "software-ag",
+  "sources": [
+    "software-ag-apis-api-openapi.yml",
+    "software-ag-applications-api-openapi.yml",
+    "software-ag-policies-api-openapi.yml",
+    "software-ag-publishing-api-openapi.yml"
+  ],
+  "outputs": [
+    "software-ag-apis-api-openapi.yml",
+    "software-ag-applications-api-openapi.yml",
+    "software-ag-policies-api-openapi.yml",
+    "software-ag-publishing-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
