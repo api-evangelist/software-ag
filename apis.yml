@@ -170,6 +170,12 @@ apis:
     url: >-
       https://raw.githubusercontent.com/api-evangelist/software-ag/refs/heads/main/rules/webmethods-api-gateway-rules.yml
 common:
+  - type: Support
+    url: https://www.softwareag.com/support
+  - type: PrivacyPolicy
+    url: https://www.softwareag.com/en/privacy/
+  - type: SignUp
+    url: https://www.softwareag.com/free-trials/
   - type: AgenticAccess
     url: agentic-access/software-ag-agentic-access.yml
   - type: DomainSecurity
