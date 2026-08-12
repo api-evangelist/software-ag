@@ -6,6 +6,20 @@ description: >-
   API Gateway, Developer Portal, Integration Server, and cloud-native integration services. Software AG was acquired by
   IBM in 2024.
 type: Index
+deliveryModel:
+  model: open-core
+  license: Apache-2.0
+  open_source: true
+  commercial: true
+  callable_host: false
+  label: Open core · an OSS project plus a commercial hosted product
+  confidence: high
+  source:
+  - license
+  - openapi
+  - pricing
+  generated: '2026-08-11'
+  method: derived
 accessModel:
   pricing: enterprise
   onboarding: self-serve
@@ -170,6 +184,9 @@ apis:
     url: >-
       https://raw.githubusercontent.com/api-evangelist/software-ag/refs/heads/main/rules/webmethods-api-gateway-rules.yml
 common:
+  - type: License
+    name: Apache-2.0
+    url: https://github.com/SoftwareAG/webmethods-developer-portal/blob/main/LICENSE
   - type: Support
     url: https://www.softwareag.com/support
   - type: PrivacyPolicy
