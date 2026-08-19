@@ -1,0 +1,367 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "webMethods API Gateway Service Management APIs API",
+    "version": "11.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "APIs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All APIs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5555/rest/apigateway/apis",
+            "params": [
+              {
+                "name": "apiIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of API IDs to filter"
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Starting index for pagination"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return"
+              }
+            ]
+          },
+          "docs": "Retrieve all or a filtered subset of APIs registered in the API Gateway with pagination support."
+        },
+        {
+          "info": {
+            "name": "Create API",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5555/rest/apigateway/apis",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new API in the API Gateway from a file, URL, or from scratch. Supports REST, SOAP, WebSocket, and OData APIs."
+        },
+        {
+          "info": {
+            "name": "Delete Multiple APIs",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5555/rest/apigateway/apis",
+            "params": [
+              {
+                "name": "apiIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of API IDs to delete"
+              },
+              {
+                "name": "forceDelete",
+                "value": "",
+                "type": "query",
+                "description": "Force delete even if API has active subscriptions"
+              }
+            ]
+          },
+          "docs": "Remove multiple inactive APIs from the API Gateway."
+        },
+        {
+          "info": {
+            "name": "Get API",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5555/rest/apigateway/apis/:apiId",
+            "params": [
+              {
+                "name": "apiId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the API"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Export format for the API definition"
+              }
+            ]
+          },
+          "docs": "Fetch a specific API definition from the API Gateway with optional format export."
+        },
+        {
+          "info": {
+            "name": "Update API",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5555/rest/apigateway/apis/:apiId",
+            "params": [
+              {
+                "name": "apiId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the API"
+              },
+              {
+                "name": "overwriteTags",
+                "value": "",
+                "type": "query",
+                "description": "Whether to overwrite existing tags"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an API definition in the API Gateway, preserving existing policies and settings."
+        },
+        {
+          "info": {
+            "name": "Delete API",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5555/rest/apigateway/apis/:apiId",
+            "params": [
+              {
+                "name": "apiId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the API"
+              }
+            ]
+          },
+          "docs": "Remove an inactive API from the API Gateway."
+        },
+        {
+          "info": {
+            "name": "Activate API",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5555/rest/apigateway/apis/:apiId/activate",
+            "params": [
+              {
+                "name": "apiId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the API"
+              }
+            ]
+          },
+          "docs": "Expose an API to consumers by activating it in the API Gateway."
+        },
+        {
+          "info": {
+            "name": "Deactivate API",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5555/rest/apigateway/apis/:apiId/deactivate",
+            "params": [
+              {
+                "name": "apiId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the API"
+              }
+            ]
+          },
+          "docs": "Hide an API from consumers by deactivating it in the API Gateway."
+        },
+        {
+          "info": {
+            "name": "Update Gateway Endpoints",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5555/rest/apigateway/apis/:apiId/gatewayEndpoints",
+            "params": [
+              {
+                "name": "apiId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the API"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create, update, or delete custom gateway endpoints for an API."
+        },
+        {
+          "info": {
+            "name": "Update API Implementation",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5555/rest/apigateway/apis/:apiId/implementation",
+            "params": [
+              {
+                "name": "apiId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the API"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the backend implementation endpoints and maturity state of an API."
+        },
+        {
+          "info": {
+            "name": "Enable API Mocking",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5555/rest/apigateway/apis/:apiId/mock/enable",
+            "params": [
+              {
+                "name": "apiId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the API"
+              }
+            ]
+          },
+          "docs": "Enable mock responses for an API for testing purposes."
+        },
+        {
+          "info": {
+            "name": "Disable API Mocking",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5555/rest/apigateway/apis/:apiId/mock/disable",
+            "params": [
+              {
+                "name": "apiId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the API"
+              }
+            ]
+          },
+          "docs": "Disable mock responses for an API."
+        },
+        {
+          "info": {
+            "name": "Enable API Tracing",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5555/rest/apigateway/apis/:apiId/tracing/enable",
+            "params": [
+              {
+                "name": "apiId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the API"
+              }
+            ]
+          },
+          "docs": "Enable diagnostic tracing for an API to capture request/response details."
+        },
+        {
+          "info": {
+            "name": "Disable API Tracing",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5555/rest/apigateway/apis/:apiId/tracing/disable",
+            "params": [
+              {
+                "name": "apiId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the API"
+              }
+            ]
+          },
+          "docs": "Disable diagnostic tracing for an API."
+        },
+        {
+          "info": {
+            "name": "Download Provider Specification",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5555/rest/apigateway/apis/:apiId/providerspecification",
+            "params": [
+              {
+                "name": "apiId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the API"
+              }
+            ]
+          },
+          "docs": "Export the API specification without gateway endpoint modifications."
+        },
+        {
+          "info": {
+            "name": "List API Packages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5555/rest/apigateway/apis/:apiId/packages",
+            "params": [
+              {
+                "name": "apiId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the API"
+              }
+            ]
+          },
+          "docs": "Retrieve all packages that include this API."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

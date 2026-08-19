@@ -1,0 +1,44 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "webMethods API Gateway Service Management APIs Policies API",
+    "version": "11.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Policies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Global Policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5555/rest/apigateway/apis/:apiId/globalPolicies",
+            "params": [
+              {
+                "name": "apiId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the API"
+              }
+            ]
+          },
+          "docs": "Retrieve all global policies applicable to this API."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

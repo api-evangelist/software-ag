@@ -1,0 +1,44 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "webMethods API Gateway Service Management APIs Applications API",
+    "version": "11.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Applications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List API Applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5555/rest/apigateway/apis/:apiId/applications",
+            "params": [
+              {
+                "name": "apiId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the API"
+              }
+            ]
+          },
+          "docs": "Retrieve all applications that are registered to consume this API."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
