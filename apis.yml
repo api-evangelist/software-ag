@@ -89,7 +89,8 @@ apis:
   humanURL: >-
     https://documentation.softwareag.com/webmethods/compendiums/v10-5/C_API_Management/api-mgmt-comp/co-oview_what_is_api_portal.html
   baseURL: http://localhost:5555/rest/apigateway
-  tags:
+  tags: []
+  tags_raw:
   - APIs
   properties:
   - type: OpenAPI
@@ -115,6 +116,8 @@ apis:
     https://documentation.softwareag.com/webmethods/compendiums/v10-5/C_API_Management/api-mgmt-comp/co-oview_what_is_api_portal.html
   baseURL: http://localhost:5555/rest/apigateway
   tags:
+  - Application
+  tags_raw:
   - Applications
   properties:
   - type: OpenAPI
