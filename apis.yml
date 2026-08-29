@@ -17,7 +17,7 @@ deliveryModel:
   - license
   - openapi
   - pricing
-  generated: '2026-08-11'
+  generated: '2026-08-28'
   method: derived
 accessModel:
   pricing: enterprise
@@ -162,6 +162,8 @@ apis:
   - type: SpectralRules
     url: https://raw.githubusercontent.com/api-evangelist/software-ag/refs/heads/main/rules/webmethods-api-gateway-rules.yml
 common:
+- type: IssueTracker
+  url: https://github.com/SoftwareAG/webmethods-developer-portal/issues
 - type: ParentCompany
   url: https://apis.io/providers/ibm/
   name: Ibm
