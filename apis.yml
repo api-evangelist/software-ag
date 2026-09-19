@@ -165,7 +165,8 @@ apis:
   humanURL: >-
     https://www.softwareag.com/en_corporate/resources/api/ds/webmethods-developer-portal.html
   baseURL: https://www.softwareag.com/
-  tags:
+  tags: []
+  tags_raw:
   - APIs
   properties:
   - type: OpenAPI
