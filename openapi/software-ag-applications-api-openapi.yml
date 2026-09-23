@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: webMethods API Gateway Service Management APIs Applications API
+  title: webMethods API Gateway Service Management Applications API
   description: The webMethods API Gateway Service Management API provides REST endpoints for managing APIs within the Software AG API Gateway platform. It supports creating, reading, updating, and deleting REST, SOAP, WebSocket, and OData APIs, as well as managing policies, applications, gateway endpoints, and publishing APIs to the Developer Portal.
   version: '11.0'
   contact:
@@ -43,13 +43,6 @@ paths:
           description: API not found
 components:
   schemas:
-    ApplicationListResponse:
-      type: object
-      properties:
-        applications:
-          type: array
-          items:
-            $ref: '#/components/schemas/Application'
     Application:
       type: object
       properties:
@@ -70,6 +63,13 @@ components:
                 type: string
               value:
                 type: string
+    ApplicationListResponse:
+      type: object
+      properties:
+        applications:
+          type: array
+          items:
+            $ref: '#/components/schemas/Application'
   securitySchemes:
     basicAuth:
       type: http
