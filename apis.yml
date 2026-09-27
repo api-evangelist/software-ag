@@ -53,7 +53,6 @@ apis:
     management, and API consumption analytics.
   humanURL: >-
     https://www.softwareag.com/en_corporate/resources/api/ds/webmethods-developer-portal.html
-  baseURL: https://www.softwareag.com/
   tags:
   - Developer Portal
   - API Management
@@ -72,7 +71,6 @@ apis:
     between enterprise applications, databases, legacy systems, and cloud services. It provides flow services,
     adapters, and REST API exposure for business process integration.
   humanURL: https://documentation.softwareag.com/
-  baseURL: https://www.softwareag.com/
   tags:
   - Integration
   - Enterprise
@@ -160,11 +158,10 @@ apis:
     url: >-
       https://raw.githubusercontent.com/api-evangelist/software-ag/refs/heads/main/rules/webmethods-api-gateway-rules.yml
 - aid: software-ag:software-ag-apis-api
-  name: Software AG AP Is API
+  name: Software AG APIs API
   description: API lifecycle management operations
   humanURL: >-
     https://www.softwareag.com/en_corporate/resources/api/ds/webmethods-developer-portal.html
-  baseURL: https://www.softwareag.com/
   tags: []
   tags_raw:
   - APIs

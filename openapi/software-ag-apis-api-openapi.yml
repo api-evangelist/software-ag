@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: webMethods API Gateway Service Management AP Is API
+  title: webMethods API Gateway Service Management APIs API
   description: The webMethods API Gateway Service Management API provides REST endpoints for managing APIs within the Software AG API Gateway platform. It supports creating, reading, updating, and deleting REST, SOAP, WebSocket, and OData APIs, as well as managing policies, applications, gateway endpoints, and publishing APIs to the Developer Portal.
   version: '11.0'
   contact:
@@ -454,24 +454,91 @@ components:
             count:
               type: integer
               description: Total number of APIs matching the filter
-    ImplementationRequest:
+    UpdateAPIRequest:
       type: object
       properties:
-        endpoints:
+        apiName:
+          type: string
+        apiVersion:
+          type: string
+        apiDescription:
+          type: string
+        tags:
           type: array
           items:
-            type: object
-            properties:
-              url:
-                type: string
-              isDefault:
-                type: boolean
+            type: string
         maturityState:
           type: string
           enum:
           - BETA
           - RELEASED
           - DEPRECATED
+    Package:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+    CreateAPIRequest:
+      type: object
+      required:
+      - type
+      - apiName
+      properties:
+        type:
+          type: string
+          enum:
+          - REST
+          - SOAP
+          - WEBSOCKET
+          - ODATA
+        apiName:
+          type: string
+        apiVersion:
+          type: string
+          default: '1.0'
+        apiDescription:
+          type: string
+        swagger:
+          type: string
+          description: URL to a Swagger/OpenAPI spec
+        url:
+          type: string
+          description: URL to the API spec or backend service
+    PackageListResponse:
+      type: object
+      properties:
+        packages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Package'
+    APIResponse:
+      type: object
+      properties:
+        apiResponse:
+          type: object
+          properties:
+            api:
+              $ref: '#/components/schemas/API'
+    GatewayEndpointsRequest:
+      type: object
+      properties:
+        gatewayEndpoints:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              url:
+                type: string
+              isDefault:
+                type: boolean
     API:
       type: object
       properties:
@@ -521,91 +588,24 @@ components:
           type: string
           format: date-time
           description: API last modification timestamp
-    UpdateAPIRequest:
+    ImplementationRequest:
       type: object
       properties:
-        apiName:
-          type: string
-        apiVersion:
-          type: string
-        apiDescription:
-          type: string
-        tags:
+        endpoints:
           type: array
           items:
-            type: string
+            type: object
+            properties:
+              url:
+                type: string
+              isDefault:
+                type: boolean
         maturityState:
           type: string
           enum:
           - BETA
           - RELEASED
           - DEPRECATED
-    Package:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        status:
-          type: string
-    PackageListResponse:
-      type: object
-      properties:
-        packages:
-          type: array
-          items:
-            $ref: '#/components/schemas/Package'
-    APIResponse:
-      type: object
-      properties:
-        apiResponse:
-          type: object
-          properties:
-            api:
-              $ref: '#/components/schemas/API'
-    CreateAPIRequest:
-      type: object
-      required:
-      - type
-      - apiName
-      properties:
-        type:
-          type: string
-          enum:
-          - REST
-          - SOAP
-          - WEBSOCKET
-          - ODATA
-        apiName:
-          type: string
-        apiVersion:
-          type: string
-          default: '1.0'
-        apiDescription:
-          type: string
-        swagger:
-          type: string
-          description: URL to a Swagger/OpenAPI spec
-        url:
-          type: string
-          description: URL to the API spec or backend service
-    GatewayEndpointsRequest:
-      type: object
-      properties:
-        gatewayEndpoints:
-          type: array
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-              url:
-                type: string
-              isDefault:
-                type: boolean
   securitySchemes:
     basicAuth:
       type: http
