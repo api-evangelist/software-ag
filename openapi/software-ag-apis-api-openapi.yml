@@ -441,19 +441,6 @@ paths:
           description: API not found
 components:
   schemas:
-    APIListResponse:
-      type: object
-      properties:
-        apiResponse:
-          type: object
-          properties:
-            apis:
-              type: array
-              items:
-                $ref: '#/components/schemas/API'
-            count:
-              type: integer
-              description: Total number of APIs matching the filter
     UpdateAPIRequest:
       type: object
       properties:
@@ -473,17 +460,20 @@ components:
           - BETA
           - RELEASED
           - DEPRECATED
-    Package:
+    GatewayEndpointsRequest:
       type: object
       properties:
-        id:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        status:
-          type: string
+        gatewayEndpoints:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              url:
+                type: string
+              isDefault:
+                type: boolean
     CreateAPIRequest:
       type: object
       required:
@@ -510,13 +500,6 @@ components:
         url:
           type: string
           description: URL to the API spec or backend service
-    PackageListResponse:
-      type: object
-      properties:
-        packages:
-          type: array
-          items:
-            $ref: '#/components/schemas/Package'
     APIResponse:
       type: object
       properties:
@@ -525,20 +508,19 @@ components:
           properties:
             api:
               $ref: '#/components/schemas/API'
-    GatewayEndpointsRequest:
+    APIListResponse:
       type: object
       properties:
-        gatewayEndpoints:
-          type: array
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-              url:
-                type: string
-              isDefault:
-                type: boolean
+        apiResponse:
+          type: object
+          properties:
+            apis:
+              type: array
+              items:
+                $ref: '#/components/schemas/API'
+            count:
+              type: integer
+              description: Total number of APIs matching the filter
     API:
       type: object
       properties:
@@ -606,6 +588,24 @@ components:
           - BETA
           - RELEASED
           - DEPRECATED
+    PackageListResponse:
+      type: object
+      properties:
+        packages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Package'
+    Package:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
   securitySchemes:
     basicAuth:
       type: http

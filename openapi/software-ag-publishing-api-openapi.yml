@@ -51,6 +51,14 @@ paths:
           description: API not found
 components:
   schemas:
+    APIResponse:
+      type: object
+      properties:
+        apiResponse:
+          type: object
+          properties:
+            api:
+              $ref: '#/components/schemas/API'
     PublishAPIRequest:
       type: object
       required:
@@ -69,14 +77,6 @@ components:
           items:
             type: string
           description: Custom endpoint URLs for the portal
-    APIResponse:
-      type: object
-      properties:
-        apiResponse:
-          type: object
-          properties:
-            api:
-              $ref: '#/components/schemas/API'
     API:
       type: object
       properties:
