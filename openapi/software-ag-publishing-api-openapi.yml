@@ -51,14 +51,6 @@ paths:
           description: API not found
 components:
   schemas:
-    APIResponse:
-      type: object
-      properties:
-        apiResponse:
-          type: object
-          properties:
-            api:
-              $ref: '#/components/schemas/API'
     PublishAPIRequest:
       type: object
       required:
@@ -126,6 +118,14 @@ components:
           type: string
           format: date-time
           description: API last modification timestamp
+    APIResponse:
+      type: object
+      properties:
+        apiResponse:
+          type: object
+          properties:
+            api:
+              $ref: '#/components/schemas/API'
   securitySchemes:
     basicAuth:
       type: http
