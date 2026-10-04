@@ -183,6 +183,9 @@ apis:
     url: >-
       https://raw.githubusercontent.com/api-evangelist/software-ag/refs/heads/main/rules/webmethods-api-gateway-rules.yml
 common:
+- type: CapabilityMap
+  url: capabilities/software-ag-capability-edges.yml
+  name: Software AG Business Capability Map
 - type: IssueTracker
   url: https://github.com/SoftwareAG/webmethods-developer-portal/issues
 - type: ParentCompany
