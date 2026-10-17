@@ -441,32 +441,6 @@ paths:
           description: API not found
 components:
   schemas:
-    APIResponse:
-      type: object
-      properties:
-        apiResponse:
-          type: object
-          properties:
-            api:
-              $ref: '#/components/schemas/API'
-    ImplementationRequest:
-      type: object
-      properties:
-        endpoints:
-          type: array
-          items:
-            type: object
-            properties:
-              url:
-                type: string
-              isDefault:
-                type: boolean
-        maturityState:
-          type: string
-          enum:
-          - BETA
-          - RELEASED
-          - DEPRECATED
     UpdateAPIRequest:
       type: object
       properties:
@@ -486,44 +460,6 @@ components:
           - BETA
           - RELEASED
           - DEPRECATED
-    GatewayEndpointsRequest:
-      type: object
-      properties:
-        gatewayEndpoints:
-          type: array
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-              url:
-                type: string
-              isDefault:
-                type: boolean
-    APIListResponse:
-      type: object
-      properties:
-        apiResponse:
-          type: object
-          properties:
-            apis:
-              type: array
-              items:
-                $ref: '#/components/schemas/API'
-            count:
-              type: integer
-              description: Total number of APIs matching the filter
-    Package:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        status:
-          type: string
     CreateAPIRequest:
       type: object
       required:
@@ -550,6 +486,20 @@ components:
         url:
           type: string
           description: URL to the API spec or backend service
+    GatewayEndpointsRequest:
+      type: object
+      properties:
+        gatewayEndpoints:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              url:
+                type: string
+              isDefault:
+                type: boolean
     PackageListResponse:
       type: object
       properties:
@@ -606,6 +556,56 @@ components:
           type: string
           format: date-time
           description: API last modification timestamp
+    ImplementationRequest:
+      type: object
+      properties:
+        endpoints:
+          type: array
+          items:
+            type: object
+            properties:
+              url:
+                type: string
+              isDefault:
+                type: boolean
+        maturityState:
+          type: string
+          enum:
+          - BETA
+          - RELEASED
+          - DEPRECATED
+    Package:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+    APIListResponse:
+      type: object
+      properties:
+        apiResponse:
+          type: object
+          properties:
+            apis:
+              type: array
+              items:
+                $ref: '#/components/schemas/API'
+            count:
+              type: integer
+              description: Total number of APIs matching the filter
+    APIResponse:
+      type: object
+      properties:
+        apiResponse:
+          type: object
+          properties:
+            api:
+              $ref: '#/components/schemas/API'
   securitySchemes:
     basicAuth:
       type: http

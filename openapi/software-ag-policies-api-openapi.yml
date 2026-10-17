@@ -43,6 +43,13 @@ paths:
           description: API not found
 components:
   schemas:
+    PolicyListResponse:
+      type: object
+      properties:
+        policies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Policy'
     Policy:
       type: object
       properties:
@@ -54,13 +61,6 @@ components:
           type: string
         enabled:
           type: boolean
-    PolicyListResponse:
-      type: object
-      properties:
-        policies:
-          type: array
-          items:
-            $ref: '#/components/schemas/Policy'
   securitySchemes:
     basicAuth:
       type: http

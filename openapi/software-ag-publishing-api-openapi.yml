@@ -51,24 +51,6 @@ paths:
           description: API not found
 components:
   schemas:
-    PublishAPIRequest:
-      type: object
-      required:
-      - portalGatewayId
-      properties:
-        portalGatewayId:
-          type: string
-          description: ID of the API Portal gateway to publish to
-        communities:
-          type: array
-          items:
-            type: string
-          description: Community names to publish the API to
-        endpoints:
-          type: array
-          items:
-            type: string
-          description: Custom endpoint URLs for the portal
     API:
       type: object
       properties:
@@ -118,6 +100,24 @@ components:
           type: string
           format: date-time
           description: API last modification timestamp
+    PublishAPIRequest:
+      type: object
+      required:
+      - portalGatewayId
+      properties:
+        portalGatewayId:
+          type: string
+          description: ID of the API Portal gateway to publish to
+        communities:
+          type: array
+          items:
+            type: string
+          description: Community names to publish the API to
+        endpoints:
+          type: array
+          items:
+            type: string
+          description: Custom endpoint URLs for the portal
     APIResponse:
       type: object
       properties:

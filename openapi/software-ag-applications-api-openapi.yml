@@ -43,13 +43,6 @@ paths:
           description: API not found
 components:
   schemas:
-    ApplicationListResponse:
-      type: object
-      properties:
-        applications:
-          type: array
-          items:
-            $ref: '#/components/schemas/Application'
     Application:
       type: object
       properties:
@@ -70,6 +63,13 @@ components:
                 type: string
               value:
                 type: string
+    ApplicationListResponse:
+      type: object
+      properties:
+        applications:
+          type: array
+          items:
+            $ref: '#/components/schemas/Application'
   securitySchemes:
     basicAuth:
       type: http
